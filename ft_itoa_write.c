@@ -6,7 +6,7 @@
 /*   By: jstomps <jstomps@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/10/31 18:29:50 by jstomps       #+#    #+#                 */
-/*   Updated: 2025/11/03 17:30:25 by jstomps       ########   odam.nl         */
+/*   Updated: 2025/11/04 14:48:36 by jstomps       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	put(long n, char *result, int *i)
 		result[(*i)++] = n + '0';
 }
 
-void	ft_itoa_write(int n)
+int	ft_itoa_write(int n)
 {
 	char	*result;
 	long	n1;
@@ -52,7 +52,7 @@ void	ft_itoa_write(int n)
 	len = nbrlen(n1);
 	result = malloc(sizeof(char) * (len + 1));
 	if (result == NULL)
-		return ;
+		return (0);
 	i = 0;
 	if (n1 < 0)
 	{
@@ -61,5 +61,17 @@ void	ft_itoa_write(int n)
 	}
 	put(n1, result, &i);
 	result[i] = '\0';
-	ft_writebutbetter(result, len);
+	write(1, result, len);
+	free(result);
+	return (len);
 }
+
+// #include <stdio.h>
+
+// int main(void)
+// {
+// 	int len;
+
+// 	len = ft_itoa_write(30000000);
+// 	printf("\n%i", len);
+// }

@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_putstring.c                                     :+:    :+:            */
+/*   ft_putchar.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jstomps <jstomps@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/10/31 19:15:16 by jstomps       #+#    #+#                 */
-/*   Updated: 2025/11/04 17:12:26 by jstomps       ########   odam.nl         */
+/*   Created: 2025/11/03 18:54:39 by jstomps       #+#    #+#                 */
+/*   Updated: 2025/11/03 20:30:48 by jstomps       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putstring(char *s)
+int	ft_putchar(int c)
 {
-	int	i;
-
-	if (!s)
-	{
-		return (write(1, "(null)", 6));
-	}
-	i = 0;
-	while (s[i])
-	{
-		write(1, &s[i], 1);
-		i++;
-	}
-	return (i);
+	write(1, &c, 1);
+	return (1);
 }

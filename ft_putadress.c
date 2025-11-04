@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_tohexdec.c                                      :+:    :+:            */
+/*   ft_putadress.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jstomps <jstomps@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/10/31 15:33:36 by jstomps       #+#    #+#                 */
-/*   Updated: 2025/11/04 19:10:30 by jstomps       ########   odam.nl         */
+/*   Created: 2025/11/04 14:41:26 by jstomps       #+#    #+#                 */
+/*   Updated: 2025/11/04 19:07:23 by jstomps       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_tohexdec2(int i, unsigned int n, char *base)
+char	*ft_putadressextra2(int i, size_t n, char *base)
 {
 	char	*str;
 
@@ -26,35 +26,44 @@ char	*ft_tohexdec2(int i, unsigned int n, char *base)
 	return (str);
 }
 
-int	ft_tohexdec(unsigned int n, char c)
+int	ft_putadressextra1(size_t n)
 {
-	unsigned int	ntmp;
-	int				i;
-	char			*base;
-	char			*str;
+	size_t	ntmp;
+	int		i;
+	char	*base;
+	char	*str;
 
-	if (c == 'x')
-		base = "0123456789abcdef";
-	else
-		base = "0123456789ABCDEF";
-	ntmp = n;
+	base = "0123456789abcdef";
 	i = 1;
+	ntmp = n;
 	while (ntmp > 15)
 	{
 		ntmp /= 16;
 		i++;
 	}
-	str = ft_tohexdec2(i - 1, n, base);
+	str = ft_putadressextra2(i - 1, n, base);
 	write(1, str, i);
 	free(str);
 	return (i);
+}
+
+int	ft_putadress(size_t n)
+{
+	int	len;
+
+	len = 0;
+	if (!n)
+		return (len += write(1, "(nil)", 5));
+	len += ft_putchar('0');
+	len += ft_putchar('x');
+	len += ft_putadressextra1(n);
+	return (len);
 }
 
 // #include <stdio.h>
 
 // int	main(void)
 // {
-
-// 	ft_tohexdec(-98243087, 'X');
-// 	printf("\n%p", );
+// 	ft_putadress((size_t)NULL);
+// 	printf("\n%p", NULL);
 // }
